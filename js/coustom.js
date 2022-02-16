@@ -1,3 +1,5 @@
+
+
 document.getElementById('calculet').addEventListener('click',function(){
     //food
     const foodInput=document.getElementById('food');
@@ -31,8 +33,26 @@ document.getElementById('calculet').addEventListener('click',function(){
     balance.innerText = finalBlance;
 
     //income clear fild
-    income.value ='';
+    // income.value ='';
 
 })
 
 //save
+document.getElementById('save').addEventListener('click',function(){
+    const income=document.getElementById('income');
+    const incomeText=Number(income.value);
+
+    const saveInput=document.getElementById('save-input');
+    const saveInputText =Number(saveInput.value);
+    const parsent =saveInputText / 100;
+    
+
+    const savingAmount=document.getElementById('saving-Amount');
+    savingAmount.innerText= parsent * incomeText;
+
+    const remainingBalance=document.getElementById('remaining-Balance');
+    
+    const balance=document.getElementById('balance');
+    remainingBalance.innerText = balance.innerText -  savingAmount.innerText;
+
+})
