@@ -5,6 +5,8 @@ function inputFild(input){
     foodInput.value ='';
     return foodtext;
 }
+
+//Calculate Button handaler
 document.getElementById('calculet').addEventListener('click',function(){
     //food
     const foodtext=inputFild('food');
@@ -35,7 +37,7 @@ document.getElementById('calculet').addEventListener('click',function(){
     }
 });
 
-//save
+//save button Handaler
 document.getElementById('save').addEventListener('click',function(){
     const income=document.getElementById('income');
     const incomeText=Number(income.value);
