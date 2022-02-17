@@ -1,58 +1,60 @@
-
-
-document.getElementById('calculet').addEventListener('click',function(){
-    //food
-    const foodInput=document.getElementById('food');
+function inputFild(input){
+    const foodInput=document.getElementById(input);
     const foodtext=Number(foodInput.value);
-    //rend
-    const rendinput=document.getElementById('rend');
-    const rendText=Number(rendinput.value);
-    //Clothes
-    const clothesInput=document.getElementById('clothes');
-    const clothesText=Number(clothesInput.value);
-
     //clear
     foodInput.value ='';
-    rendinput.value ='';
-    clothesInput.value ='';
-    //totalexpness
-    const totalExpness=document.getElementById('totalexpness')
-    const totalExpnessText =Number(totalExpness.innerText);
-    
-    const totalAmount= foodtext + rendText + clothesText;
-    totalExpness.innerText =totalAmount;
-
-    //income
+    return foodtext;
+}
+document.getElementById('calculet').addEventListener('click',function(){
+    //food
+    const foodtext=inputFild('food');
+    //rend
+    const rendText=inputFild('rend');
+    //clothes
+    const clothesText=inputFild('clothes');
+        //income
     const income=document.getElementById('income');
     const incomeText=Number(income.value);
-    //totalBalance
+    // blance
     const balance=document.getElementById('balance');
-    
-
-    const finalBlance= incomeText - totalAmount;
-    balance.innerText = finalBlance;
-
-    //income clear fild
-    // income.value ='';
-
-})
+   
+    //totalexpness
+    if (foodtext > 0 && rendText > 0 && clothesText > 0 && incomeText > 0) {
+        const totalExpness=document.getElementById('totalexpness')
+        const totalExpnessText =Number(totalExpness.innerText);  
+        const totalAmount = foodtext + rendText + clothesText;
+        if(incomeText > totalAmount){
+            totalExpness.innerText =totalAmount;
+            const finalBlance= incomeText - totalAmount;
+            balance.innerText = finalBlance;
+        }else{
+            alert('Your balance is low !!!')
+        }    
+    }else{
+        alert('Enter Possitive Number 😐')
+    }
+});
 
 //save
 document.getElementById('save').addEventListener('click',function(){
     const income=document.getElementById('income');
     const incomeText=Number(income.value);
-
     const saveInput=document.getElementById('save-input');
     const saveInputText =Number(saveInput.value);
-    const parsent =saveInputText / 100;
-    
-
-    const savingAmount=document.getElementById('saving-Amount');
-    savingAmount.innerText= parsent * incomeText;
-
-    const remainingBalance=document.getElementById('remaining-Balance');
-    
-    const balance=document.getElementById('balance');
-    remainingBalance.innerText = balance.innerText -  savingAmount.innerText;
+    if (saveInputText > 0) {
+        const parsent =saveInputText / 100;
+        const savingAmount=document.getElementById('saving-Amount');
+        const cheekValue = parsent * incomeText;
+        const balance=document.getElementById('balance');
+        if(Number(cheekValue) < Number(balance.innerText)){
+            savingAmount.innerText = cheekValue;
+            const remainingBalance=document.getElementById('remaining-Balance');  
+            remainingBalance.innerText = balance.innerText -  savingAmount.innerText;
+        }else{
+            alert('Your balance is low')
+        }
+    }else{
+        alert('Enter a possative number')
+    }
 
 })
